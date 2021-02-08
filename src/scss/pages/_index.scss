@@ -1,4 +1,58 @@
-.main__list {
-  padding-left: 2rem;
-  padding-bottom: 20px;
+.page__main {
+  margin: 0 rem(16);
+  font-family: $font-main;
+  &--title {
+    margin-bottom: rem(15);
+    font-size: rem(30);
+    color: $color-main;
+  }
+  &--fieldset {
+    border: none;
+    padding: rem(20) 0;
+  }
+  &--results {
+    background-color: $color-light;
+    padding: rem(30);
+    & .subtitle {
+      margin-bottom: rem(20);
+      font-size: rem(16);
+      color: $color-dark;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-bottom: rem(1) solid $color-secondary;
+    }
+  }
+  &--label {
+    display: block;
+    margin-bottom: rem(15);
+    font-size: rem(18);
+  }
+  &--input {
+    display: block;
+    margin-bottom: 20px;
+    width: 30%;
+    height: 30px;
+  }
+  &--button {
+    padding: rem(5) rem(15);
+    border: rem(1) solid $color-secondary;
+    border-radius: rem(5);
+    &.search {
+      background-color: $color-main;
+      color: white;
+    }
+  }
+}
+
+.searchList {
+  list-style-type: none;
+  display: flex;
+
+  &__li {
+    padding: rem(20) rem(20) rem(20) 0;
+  }
+  &__title {
+    font-size: rem(16);
+    text-align: center;
+  }
 }

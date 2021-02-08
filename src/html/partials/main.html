@@ -1,40 +1,31 @@
 <main class="page__main">
-  <h2>Este es el starter kit de Adalab</h2>
-  <p>Lo usamos para aprender:</p>
-  <ul class="main__list">
-    <li>Sass</li>
-    <li>HTML partials</li>
-    <li>Gulp</li>
-    <li>y muchas cosas más</li>
-  </ul>
-  <p>Si quieres saber cúales son las rutas correctas para:</p>
-  <ul class="main__list">
-    <li>
-      una <code class="code">&lt;img /&gt;</code> mira el fichero
-      <code class="code">./src/html/partials/header.html</code>.
-    </li>
-    <li>
-      y para un <code class="code">background-image</code> mira el fichero
-      <code class="code">./src/html/scss/layout/_page.scss</code>.
-    </li>
-  </ul>
-  <p>
-    Si quieres saber cómo usar un partial HTML dentro de otro partial, busca en la carperta
-    <code class="code">./src/html/index.html</code> y
-    <code class="code">./src/html/partials/main.html</code>, y verás cómo estamos creando estos
-    enlaces:
-  </p>
-  <ul class="main__list">
-    <li>
-      <include
-        src="./link.html"
-        aClass="link__adalab"
-        text="Adalab"
-        url="https://adalab.es"
-      ></include>
-    </li>
-    <li>
-      <include src="./link.html" text="Más info del starter kit" url="./more-info.html"></include>
-    </li>
-  </ul>
+  <form action="" method="post" class="js-form">
+    <h2 class="page__main--title">Bienvenido a TV Maze, tu buscador de series</h2>
+    <fieldset class="page__main--fieldset">
+      <label for="setSeries" class="page__main--label">Buscador de series</label>
+      <input placeholder ="¿Qué serie te apetece ver hoy?" type="text" id="setSeries" name="setSeries" class="page__main--input js-seriesInput">
+              <input type="submit" class="page__main--button search js-searchBtn" value="Buscar" />
+              <input type="reset" class="page__main--button js-resetBtn" value="Borra" />
+    </fieldset>
+    <div class="page__main--results">
+      <h2 class="subtitle">Resultados de búsqueda</h2>
+      <ul class="searchList js-searchList">
+        <!-- LO QUE TENGO QUE PINTAR
+          <li class="searchList__li js-movie">
+          <img class="js-movieImg" src="https://via.placeholder.com/210x295/ffffff/666666/?" alt="" title="">
+          <h3 class="searchList__title js-movieTitle">perico de los palotes</h3>
+        </li>
+        <li class="searchList__li js-movie">
+          <img class="js-movieImg" src="https://via.placeholder.com/210x295/ffffff/666666/?" alt="" title="">
+          <h3 class="searchList__title js-movieTitle">perico de los palotes</h3>
+        </li>
+        <li class="searchList__li js-movie">
+          <img class="js-movieImg" src="https://via.placeholder.com/210x295/ffffff/666666/?" alt="" title="">
+          <h3 class="searchList__title js-movieTitle">perico de los palotes</h3>
+        </li> -->
+        
+      </ul>
+      
+    </div>
+  </form>
 </main>

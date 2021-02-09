@@ -13,7 +13,7 @@ let favSeries = [];
 function getSeries() {
     const search = inputElement.value;
     fetch(`http://api.tvmaze.com/search/shows?q=${search}`)
-    // fetch('http://api.tvmaze.com/search/shows?q=girls')
+ 
       .then(response => response.json())
         .then(data => {
             for (const series of data) {
@@ -24,26 +24,30 @@ function getSeries() {
         });
 }
 searchBtnElement.addEventListener ('click', getSeries);
-// getSeries();
+
 
 // pintar series
 function paintSearchResults() {
     let htmlCode = '';
+    const defaultImg = 'https://via.placeholder.com/210x295/ffffff/666666/?';
+    const defaultAlt = 'Imagen no disponible';
+    htmlCode += '<li class="searchList__li js-movie">';
     for (const serie of seriesArray) {
         const seriesName = serie.name;
-        // const seriesId = serie.id;
-        const serieImg = serie.image;
-        const myImg = serieImg.medium;
-        console.log(myImg);
-        const defaultImg = 'https://via.placeholder.com/210x295/ffffff/666666/?';
-        const defaultAlt = 'Imagen no disponible';
-        htmlCode += '<li class="searchList__li js-movie">';
-        if (serieImg === null) {
-            htmlCode += `<img class="js-movieImg" src=${defaultImg} alt=${defaultAlt} title=${defaultAlt}>`;
-        } else {
-            htmlCode += `<img class="js-movieImg" src=${myImg} alt=${seriesName} title=${seriesName}>`;
+        const seriesId = serie.id;
+        const serieImgsObj = serie.image;
+        let myImg = '';
+        for (const serieImg in serieImgsObj) {
+            if (serieImg === 'medium'){
+                myImg = serieImgsObj[serieImg];
+                htmlCode += `<img class="js-movieImg" src="${myImg}" alt="${seriesName}" title="${seriesName}" size="210x295">`;
+            } else if (serieImg === null){
+                myImg = defaultImg;
+                htmlCode += `<img class="js-movieImg" src="${myImg}" alt="${defaultAlt}" title="${defaultAlt}"  size="210x295">`;
+            }
         }
-        htmlCode += `<h3 class="searchList__title js-movieTitle">${seriesName}</h3>`;
+        htmlCode += `<h3 class="searchList__title js-movieTitle">${seriesName} · ID:`;
+        htmlCode += `<span>${seriesId}</span></h3>`;
         htmlCode += '</li>';
     }
     ulResultsElement.innerHTML = htmlCode;

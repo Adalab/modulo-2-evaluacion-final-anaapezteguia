@@ -1,26 +1,15 @@
 <main class="page__main">
   <form action=""  class="js-form">
-    <h2 class="page__main--title">Bienvenidos</h2>
-    <fieldset class="page__main--fieldset">
-      <label for="setSeries" class="page__main--label">Buscador de series</label>
-      <input placeholder ="¿Qué serie te apetece ver hoy?" type="text" id="setSeries" name="setSeries" class="page__main--input js-seriesInput" value="dexter">
-              <input type="submit" class="page__main--button search js-searchBtn" value="Buscar" />
-              <input type="reset" class="page__main--button js-resetBtn" value="Borra" />
-    </fieldset>
-    <div class="page__main--results">
-      <h2 class="subtitle">Resultados de búsqueda</h2>
-      <ul class="searchList js-searchList">
-        <!-- Aquí empieza el código que vamos a generar desde JS -->
-        <!-- <li class="searchList__li js-series">
-          <div class="searchList__fav">
-          <img class="js-movieImg" src="" alt="" title="" size="210x295">
-          <h3 class="searchList__title js-movieTitle">Serie · ID:<span>X</span></h3>
-          </div>
-          </li>
-        </li> -->
-        <!-- Aquí acaba el código que vamos a generar desde JS -->
-      </ul>
-      
+    <div class="wrapper">
+      <h2 class="page__main--title">Bienvenidos</h2>
+      <fieldset class="page__main--fieldset">
+        <label for="setSeries" class="page__main--label">Buscador de series</label>
+        <input placeholder ="¿Qué serie te apetece ver hoy?" type="text" id="setSeries" name="setSeries" class="page__main--input js-seriesInput" value="dexter">
+        <!-- Eliminar el value del input antes de terminar el ejercicio -->
+                <input type="submit" class="page__main--button search js-searchBtn" value="Buscar" />
+                <input type="reset" class="page__main--button js-resetBtn" value="Borra" />
+      </fieldset>
     </div>
+    <include src="./results.html"></include>
   </form>
 </main>

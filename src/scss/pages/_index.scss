@@ -1,7 +1,7 @@
 .page__main {
-  margin: 0 rem(16);
+  padding-top: rem(48);
   font-family: $font-main;
-
+  width: 100%;
   &--title {
     margin-bottom: rem(15);
     font-size: rem(30);
@@ -12,19 +12,15 @@
     border: none;
     padding: rem(20) 0;
   }
-  &--results {
-    background-color: $color-light;
-    padding: rem(30);
-    & .subtitle {
-      margin-bottom: rem(20);
-      font-size: rem(16);
-      color: $color-main;
-      text-transform: uppercase;
-      font-weight: 600;
-      padding: rem(5);
-      border-top: rem(1) solid $color-main;
-      border-bottom: rem(1) solid $color-main;
-    }
+  &--subtitle {
+    margin-bottom: rem(20);
+    font-size: rem(16);
+    color: $color-main;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: rem(5);
+    border-top: rem(1) solid $color-main;
+    border-bottom: rem(1) solid $color-main;
   }
   &--label {
     display: block;
@@ -47,10 +43,14 @@
     }
   }
 }
+.results {
+  background-color: $color-light;
+  padding: rem(50) 0;
+}
 
-.searchList {
+.searchList,
+.favList {
   list-style-type: none;
-
   &__li {
     padding: rem(20) rem(20) rem(20) 0;
   }

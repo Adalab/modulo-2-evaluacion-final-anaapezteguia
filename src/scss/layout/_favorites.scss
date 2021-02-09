@@ -1,0 +1,14 @@
+.favorites__section {
+  width: 30%;
+  //   border-right: rem(1) solid $color-secondary;
+  padding: rem(48) rem(24);
+  background-color: #a3e8e0d7;
+  &--title {
+    display: block;
+    font-size: rem(24);
+    color: $color-main;
+    font-weight: 600;
+    margin-bottom: rem(20);
+    border-bottom: rem(1) solid $color-main;
+  }
+}

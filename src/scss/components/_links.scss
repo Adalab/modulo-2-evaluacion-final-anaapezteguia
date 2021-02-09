@@ -1,10 +1,7 @@
-.link__tvmaze {
-  text-decoration: none;
-  &:hover {
-    color: $color-main;
-  }
+.link__adalab {
+  &:hover,
   &:active,
   &:visited {
-    color: $color-dark;
+    color: $color-light;
   }
 }

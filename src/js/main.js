@@ -21,7 +21,6 @@ function getSeries() {
                 seriesArray.push(series.show);
             }
             paintSearchResults();
-        //guardaremos en LOCAL STORAGE
         });
 }
 searchBtnElement.addEventListener('click', getSeries);
@@ -33,11 +32,25 @@ function handleForm(ev) {
 formElement.addEventListener('submit', handleForm);
 
 //local storage
-// function setInLocalStorage() {
-//     const stringSeries = JSON.stringify(favSeries);
-//     localStorage.setItem('favSeries', stringSeries);
-//   }
-
+function setInLocalStorage() {
+    const stringSeries = JSON.stringify(favSeries);
+    localStorage.setItem('favSeries', stringSeries);
+    // console.log(JSON.parse(stringSeries));
+}
+// borrar
+function removeFromLocalStorage() {
+    setInLocalStorage();
+    const savedFavs = localStorage.getItem('favSeries');
+    const savedFavsArray = JSON.parse(savedFavs)
+    localStorage.removeItem(savedFavsArray);
+}
+  
+  function getFromLocalStorage() {
+      const savedFavs = localStorage.getItem('favSeries');
+      const savedFavsArray = JSON.parse(savedFavs);
+      console.log(savedFavsArray);
+    //   paintFavorites();
+  }
   
 // pintar series
 function paintSearchResults() {
@@ -46,6 +59,12 @@ function paintSearchResults() {
     // pintando HTML
     // si me queda tiempo, PARA NOTA, pintarlo con DOM
     for (const serie of seriesArray) {
+        // let isValidClass;
+        // if (isFavoriteSerie(serie)) {
+        // isValidClass = '';
+        // } else {
+        // isValidClass = 'palette--hidden';
+        // }
         //aplico la clase favorita al clicarla
         let isFavoriteClass;
         let fav;
@@ -111,19 +130,21 @@ function handlePickedSeries(ev) {
       const seriesIndexId = seriesFoundIndex.id;
       // si la serie no está en favoritos findIndex me ha devuelto -1
       if (favoritesFoundIndex === -1) {
-          // para luego añadirlo al array favSeries
+        // para luego añadirlo al array favSeries
           favSeries.push(seriesFoundIndex);
-        //   console.log(favSeries);
+        // guardo en local storage
+          setInLocalStorage();
           
           // si hay favoritos comparo los ID del clicado y el de favoritos
     } else if ((favoritesFoundIndex >= 0) && (clickedSeriesId === seriesIndexId)){
-      // para sacarlo de favSeries necesito el índice del elemento que quiero borrar (solo un elemento)
+        // para sacarlo de favSeries necesito el índice del elemento que quiero borrar (solo un elemento)
         favSeries.splice(favoritesFoundIndex, 1);
-        // console.log(favSeries);
+        // borrar de Local Storage
+          removeFromLocalStorage();
     }
     // vuelvo a pintar y a escuchar eventos cada vez que cambio algo
     paintSearchResults();
   }
 
 //quitar antes de subir
-searchBtnElement.click()
+// searchBtnElement.click()

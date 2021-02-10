@@ -4,6 +4,7 @@ const formElement = document.querySelector('.js-form');
 const inputElement = document.querySelector('.js-seriesInput');
 const searchBtnElement = document.querySelector('.js-searchBtn');
 const resetBtnElement = document.querySelector('.js-resetBtn');
+const clearBtnElement = document.querySelector('.js-clearBtn');
 const ulResultsElement = document.querySelector('.js-searchList');
 const ulFavListElement = document.querySelector('.js-favListContainer');
 
@@ -25,6 +26,25 @@ function getSeries() {
 }
 searchBtnElement.addEventListener('click', getSeries);
 
+//borrar búsqueda
+function clearSearch() {
+  let resetSearch = inputElement;
+  resetSearch.value = '';
+  ulResultsElement.innerHTML = '';
+  seriesArray = [];
+}
+inputElement.addEventListener('focus', clearSearch);
+resetBtnElement.addEventListener('click', clearSearch);
+
+// borrar favoritos y Local Storage
+function clearFavorites() {
+  let clearFavs = ulFavListElement;
+  clearFavs.innerHTML = '';
+  favSeries = [];
+  localStorage.clear();
+}
+clearBtnElement.addEventListener('click', clearFavorites);
+
 // prevenir envío form
 function handleForm(ev) {
   ev.preventDefault();
@@ -43,12 +63,15 @@ function removeFromLocalStorage() {
   const savedFavsArray = JSON.parse(savedFavs)
   localStorage.removeItem(savedFavsArray);
 }
-  
+// recoger
 function getFromLocalStorage() {
   const savedFavs = localStorage.getItem('favSeries');
-  const savedFavsArray = JSON.parse(savedFavs);
-  console.log(savedFavsArray);
-  // paintFavoritesList();
+  if (savedFavs) {
+    // si hay datos guardados, los parseo
+    const savedFavsArray = JSON.parse(savedFavs);
+    favSeries = savedFavsArray;
+    paintFavoritesList();
+  } 
 }
   
 // pintar series
@@ -94,8 +117,6 @@ function paintSearchResults() {
 function paintFavoritesList() {
   let htmlFavCode = '';
   const defaultFavImg = 'https://via.placeholder.com/105x148/dcbcc6/666666/?text=DEFAULT IMAGE';
-  // pintando HTML
-  // si me queda tiempo, PARA NOTA, pintarlo con DOM
   for (const favorite of favSeries) {
     let isValidClass;
     if (isFavoriteList(favorite)) {
@@ -108,7 +129,6 @@ function paintFavoritesList() {
     const favImgsObj = favorite.image; //objeto con las imágenes
     htmlFavCode += `<li class="favList__li js-favList" id="${favId}">`;
     htmlFavCode += '<div class="favList__results">';
-    // si no existe img medium, saca la default img y si no la suya
     let myFavImg = favImgsObj === null ? defaultFavImg : favImgsObj.medium;
     htmlFavCode += `<img class="${isValidClass} favImg js-seriesImg" src="${myFavImg}" alt="${favName}" title="${favName}" height="148px" width="105px" >`;
     htmlFavCode += `<h3 class="favList__title ${isValidClass} title js-seriesTitle">${favName}`;
@@ -168,14 +188,14 @@ function handlePickedSeries(ev) {
     const seriesFoundIndex = seriesArray.find(function (serie) {
     return serie.id === clickedSeriesId;
     });
-    const seriesIndexId = seriesFoundIndex.id;
+  const seriesIndexId = seriesFoundIndex.id;
+  console.log(seriesFoundIndex.id);
     // si la serie no está en favoritos findIndex me ha devuelto -1
     if (favoritesFoundIndex === -1) {
       // para luego añadirlo al array favSeries
       favSeries.push(seriesFoundIndex);
       // guardo en local storage
       setInLocalStorage();
-      paintFavoritesList();
       // si hay favoritos comparo los ID del clicado y el de favoritos
     } else if ((favoritesFoundIndex >= 0) && (clickedSeriesId === seriesIndexId)){
       // para sacarlo de favSeries necesito el índice del elemento que quiero borrar (solo un elemento)
@@ -185,7 +205,7 @@ function handlePickedSeries(ev) {
     }
   // vuelvo a pintar y a escuchar eventos cada vez que cambio algo
   paintSearchResults();
+  paintFavoritesList();
 }
-
-//quitar antes de subir
-// searchBtnElement.click()
+// al cargar la página
+getFromLocalStorage();

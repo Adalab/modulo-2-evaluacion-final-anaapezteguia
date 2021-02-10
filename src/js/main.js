@@ -1,5 +1,4 @@
 'use strict'
-//inicializo variables globales
 const formElement = document.querySelector('.js-form');
 const inputElement = document.querySelector('.js-seriesInput');
 const searchBtnElement = document.querySelector('.js-searchBtn');
@@ -8,7 +7,6 @@ const clearBtnElement = document.querySelector('.js-clearBtn');
 const ulResultsElement = document.querySelector('.js-searchList');
 const ulFavListElement = document.querySelector('.js-favListContainer');
 
-//arrays de pelis vacíos
 let seriesArray = [];
 let favSeries = [];
 
@@ -26,7 +24,7 @@ function getSeries() {
 }
 searchBtnElement.addEventListener('click', getSeries);
 
-//borrar búsqueda
+//borrar búsqueda desde el botón de reset y desde el input
 function clearSearch() {
   let resetSearch = inputElement;
   resetSearch.value = '';
@@ -51,26 +49,27 @@ function handleForm(ev) {
 }
 formElement.addEventListener('submit', handleForm);
 
-//local storage
+//meter en Local Storage
 function setInLocalStorage() {
   const stringSeries = JSON.stringify(favSeries);
   localStorage.setItem('favSeries', stringSeries);
 }
-// borrar
+//borrar de Local Storage
 function removeFromLocalStorage() {
   setInLocalStorage();
   const savedFavs = localStorage.getItem('favSeries');
   const savedFavsArray = JSON.parse(savedFavs)
   localStorage.removeItem(savedFavsArray);
 }
-// recoger
+// recoger los favos de Local Storage
 function getFromLocalStorage() {
   const savedFavs = localStorage.getItem('favSeries');
   if (savedFavs) {
-    // si hay datos guardados, los parseo
-    const savedFavsArray = JSON.parse(savedFavs);
+  // si hay datos guardados, los parseo
+  const savedFavsArray = JSON.parse(savedFavs);
     favSeries = savedFavsArray;
-    paintFavoritesList();
+  // y repinto la lista
+  paintFavoritesList();
   } 
 }
   
@@ -78,36 +77,32 @@ function getFromLocalStorage() {
 function paintSearchResults() {
   let htmlCode = '';
   const defaultImg = 'https://via.placeholder.com/210x295/dcbcc6/666666/?text=DEFAULT IMAGE';
-  // pintando HTML
-  // si me queda tiempo, PARA NOTA, pintarlo con DOM
   for (const serie of seriesArray) {
     let isValidClass;
     if (isFavoriteList(serie)) {
-      isValidClass = 'goFavorite';
+        isValidClass = 'goToFavorites';
     } else {
-      isValidClass = 'hidden';
+        isValidClass = 'hidden';
     }
-      //aplico la clase favorita al clicarla
-      let isFavoriteClass;
-      let fav;
-      if (isFavoriteSerie(serie)) {
-          isFavoriteClass = 'favorite';
-           fav = '⭑';
-      } else {
-          isFavoriteClass = '';
-          fav = '';
-      }
-      const seriesId = serie.id;
-      const seriesName = serie.name;
-      const serieImgsObj = serie.image; //objeto con las imágenes
-      htmlCode += `<li class="searchList__li js-series" id="${seriesId}">`;
-      htmlCode += '<div class="searchList__container">';
-      // si no existe img medium, saca la default img y si no la suya
-      let myImg = serieImgsObj === null ? defaultImg : serieImgsObj.medium;
-      htmlCode += `<img class="${isFavoriteClass} favImg js-seriesImg" src="${myImg}" alt="${seriesName}" title="${seriesName}" height="295px" width="210px" >`;
-      htmlCode += `<h3 class="searchList__title ${isFavoriteClass} title js-seriesTitle">${seriesName} ${fav}`;
-      htmlCode += '</div>';
-      htmlCode += '</li>';
+    let isFavoriteClass;
+    let fav;
+    if (isFavoriteSerie(serie)) {
+      isFavoriteClass = 'favorite';
+      fav = '⭑';
+    } else {
+      isFavoriteClass = '';
+      fav = '';
+    }
+    const seriesId = serie.id;
+    const seriesName = serie.name;
+    const serieImgsObj = serie.image; //objeto 
+    htmlCode += `<li class="searchList__li js-series" id="${seriesId}">`;
+    htmlCode += '<div class="searchList__container">';
+    let myImg = serieImgsObj === null ? defaultImg : serieImgsObj.medium;
+    htmlCode += `<img class="${isFavoriteClass} favImg js-seriesImg" src="${myImg}" alt="${seriesName}" title="${seriesName}" height="295px" width="210px" >`;
+    htmlCode += `<h3 class="searchList__title ${isFavoriteClass} title js-seriesTitle">${seriesName} ${fav}`;
+    htmlCode += '</div>';
+    htmlCode += '</li>';
   }
   ulResultsElement.innerHTML = htmlCode;
   listenSeriesEvents();
@@ -120,13 +115,13 @@ function paintFavoritesList() {
   for (const favorite of favSeries) {
     let isValidClass;
     if (isFavoriteList(favorite)) {
-      isValidClass = 'goFavorite';
+      isValidClass = 'goToFavorites';
     } else {
       isValidClass = '';
     }
     const favId = favorite.id;
     const favName = favorite.name;
-    const favImgsObj = favorite.image; //objeto con las imágenes
+    const favImgsObj = favorite.image; //objeto 
     htmlFavCode += `<li class="favList__li js-favList" id="${favId}">`;
     htmlFavCode += '<div class="favList__results">';
     let myFavImg = favImgsObj === null ? defaultFavImg : favImgsObj.medium;
@@ -161,22 +156,21 @@ function isFavoriteList(favorite) {
   return favorite.name.includes(filterValue);
 }
 
-// escucho los eventos de las series
+// escucho los eventos de la búsqueda de series
 function listenSeriesEvents() {
   const seriesElements = document.querySelectorAll('.js-series');
   for (const serieElement of seriesElements) {
     serieElement.addEventListener('click', handlePickedSeries);
   }
 }
-
+// escucho los eventos de la búsqueda de favoritos
 function listenFavoritesEvent() {
   const favListElements = document.querySelectorAll('.js-favList');
   for (const favElement of favListElements) {
     favElement.addEventListener('click', handlePickedSeries);
   }
 }
-  
-  // compruebo si la serie clicada está dentro de favSeries
+// compruebo si la serie clicada está dentro de favSeries
 function handlePickedSeries(ev) {
   // obtengo el id de la serie clicada
   const clickedSeriesId = parseInt(ev.currentTarget.id);//convertir en nº
@@ -184,28 +178,25 @@ function handlePickedSeries(ev) {
   const favoritesFoundIndex = favSeries.findIndex(function (favorite) {
     return favorite.id === clickedSeriesId;
   });
-  // busco la serie clicada en el array de seriesArray
+  // si la serie no está en favoritos findIndex me devuelve -1 (naina)
+  if (favoritesFoundIndex === -1) {
+    // busco la serie clicada en el array de resultados de búsqueda
     const seriesFoundIndex = seriesArray.find(function (serie) {
-    return serie.id === clickedSeriesId;
+      return serie.id === clickedSeriesId;
     });
-  const seriesIndexId = seriesFoundIndex.id;
-  console.log(seriesFoundIndex.id);
-    // si la serie no está en favoritos findIndex me ha devuelto -1
-    if (favoritesFoundIndex === -1) {
-      // para luego añadirlo al array favSeries
-      favSeries.push(seriesFoundIndex);
-      // guardo en local storage
-      setInLocalStorage();
-      // si hay favoritos comparo los ID del clicado y el de favoritos
-    } else if ((favoritesFoundIndex >= 0) && (clickedSeriesId === seriesIndexId)){
-      // para sacarlo de favSeries necesito el índice del elemento que quiero borrar (solo un elemento)
-      favSeries.splice(favoritesFoundIndex, 1);
-      // borrar de Local Storage
-      removeFromLocalStorage();
-    }
-  // vuelvo a pintar y a escuchar eventos cada vez que cambio algo
+    // para añadirla al array de favos
+    favSeries.push(seriesFoundIndex);
+    // guardo en local storage
+    setInLocalStorage();
+  } else {
+    // si la serie está en favos busco su índice y la elimino
+    favSeries.splice(favoritesFoundIndex, 1);
+    // y borro de Local Storage
+    removeFromLocalStorage();
+  }
+  // vuelvo a pintar
   paintSearchResults();
   paintFavoritesList();
 }
-// al cargar la página
+// al cargar la página compruebo si tengo algo en la lista de favos
 getFromLocalStorage();

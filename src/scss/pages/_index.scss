@@ -13,16 +13,6 @@
     border: none;
     padding: rem(20) 0;
   }
-  &--subtitle {
-    margin-bottom: rem(20);
-    font-size: rem(16);
-    color: $color-main;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: rem(5);
-    border-top: rem(1) solid $color-main;
-    border-bottom: rem(1) solid $color-main;
-  }
   &--label {
     display: block;
     margin-bottom: rem(15);
@@ -31,39 +21,18 @@
   &--input {
     display: block;
     margin-bottom: 20px;
-    width: 30%;
-    height: 30px;
+    width: rem(250);
+    height: rem(30);
   }
   &--button {
     padding: rem(5) rem(15);
-    border: rem(1) solid $color-secondary;
+    border: rem(1) solid $color-dark;
     border-radius: rem(5);
+    color: $color-dark;
     &.search {
-      background-color: $color-main;
-      color: white;
+      background-color: $color-main-light;
+      color: $color-main;
+      border: rem(1) solid $color-main;
     }
-  }
-}
-.results {
-  background-color: $color-light;
-  padding: rem(50) 0;
-}
-
-.searchList {
-  list-style-type: none;
-  &__li {
-    padding: rem(20) rem(20) rem(20) 0;
-  }
-  &__container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: rem(215);
-  }
-  &__title {
-    display: inline;
-    font-size: rem(16);
-    text-align: left;
-    font-weight: 300;
   }
 }

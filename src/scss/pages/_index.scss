@@ -49,8 +49,7 @@
   padding: rem(50) 0;
 }
 
-.searchList,
-.favList {
+.searchList {
   list-style-type: none;
   &__li {
     padding: rem(20) rem(20) rem(20) 0;
@@ -66,21 +65,5 @@
     font-size: rem(16);
     text-align: left;
     font-weight: 300;
-  }
-}
-.favList {
-  &__results {
-    width: rem(105);
-  }
-}
-
-.favorite {
-  &.favImg {
-    border: rem(4) solid $color-fav;
-    border-radius: rem(4);
-  }
-  &.title {
-    font-weight: 600;
-    color: $color-fav;
   }
 }

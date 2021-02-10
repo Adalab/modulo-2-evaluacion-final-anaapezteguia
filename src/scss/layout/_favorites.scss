@@ -4,10 +4,54 @@
   background-color: #a3e8e0d7;
   &--title {
     display: block;
-    font-size: rem(24);
+    font-size: rem(18);
     color: $color-main;
     font-weight: 600;
     margin-bottom: rem(20);
     border-bottom: rem(1) solid $color-main;
   }
+}
+.favList {
+  list-style-type: none;
+  &__li {
+    padding: rem(20) rem(20) rem(20) 0;
+  }
+  &__results {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: rem(105);
+  }
+  &__title {
+    display: inline;
+    font-size: rem(14);
+    text-align: left;
+    padding-top: rem(5);
+    font-weight: 600;
+    color: $color-dark;
+  }
+  & .favImg {
+    border: rem(4) solid $color-favList;
+  }
+  & .title {
+    color: $color-favList;
+  }
+}
+
+.goFavorite {
+  display: block;
+}
+.favorite {
+  &.favImg {
+    border: rem(4) solid $color-fav;
+    border-radius: rem(4);
+  }
+  &.title {
+    font-weight: 600;
+    color: $color-fav;
+  }
+}
+
+.hidden {
+  display: none;
 }

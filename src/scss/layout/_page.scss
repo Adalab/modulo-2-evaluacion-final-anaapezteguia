@@ -1,11 +1,38 @@
-body {
+.page__main {
+  padding-top: rem(48);
   font-family: $font-main;
-  font-weight: 300;
-  height: 100vh;
-}
-.wrapper {
-  margin: 0 rem(50);
-}
-.divider {
-  display: flex;
+  width: 100%;
+  min-height: 75vh;
+  &--title {
+    margin-bottom: rem(15);
+    font-size: rem(30);
+    color: $color-main;
+    font-weight: 600;
+  }
+  &--fieldset {
+    border: none;
+    padding: rem(20) 0;
+  }
+  &--label {
+    display: block;
+    margin-bottom: rem(15);
+    font-size: rem(18);
+  }
+  &--input {
+    display: block;
+    margin-bottom: 20px;
+    width: rem(250);
+    height: rem(30);
+  }
+  &--button {
+    padding: rem(5) rem(15);
+    border: rem(1) solid $color-dark;
+    border-radius: rem(5);
+    color: $color-dark;
+    &.search {
+      background-color: $color-main-light;
+      color: $color-main;
+      border: rem(1) solid $color-main;
+    }
+  }
 }

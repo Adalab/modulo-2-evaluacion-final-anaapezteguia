@@ -1,21 +1,27 @@
 .favorites__section {
-  width: 30%;
+  width: 100%;
   padding: rem(48) rem(24);
-  background-color: $color-main-light;
+  background-color: #f1f1f1;
+  @include tablet {
+    width: 45%;
+  }
   &--title {
     display: block;
     font-size: rem(16);
-    color: $color-main;
+    color: $color-dark;
     font-weight: 600;
     margin-bottom: rem(20);
-    border-top: rem(1) solid $color-main;
-    border-bottom: rem(1) solid $color-main;
+    text-transform: uppercase;
+    background-color: $color-light;
+    padding: rem(5) rem(10);
+    // border-top: rem(1) solid $color-main;
+    // border-bottom: rem(1) solid $color-main;
   }
   &--clear {
     padding: rem(5) rem(15);
-    border: rem(1) solid $color-main;
+    border: rem(1) solid $color-secondary;
     border-radius: rem(5);
-    background-color: $color-main-light;
+    background-color: $color-light;
     color: $color-main;
   }
 }
@@ -39,10 +45,10 @@
     color: $color-dark;
   }
   & .favImg {
-    border: rem(4) solid $color-favList;
+    border: rem(2) solid $color-secondary;
   }
   & .title {
-    color: $color-favList;
+    color: $color-dark;
   }
 }
 

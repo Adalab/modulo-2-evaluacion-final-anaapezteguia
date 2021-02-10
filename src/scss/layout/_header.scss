@@ -1,8 +1,5 @@
 .page__header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 20px 0;
+  padding: rem(20) 0;
   background-color: $color-dark;
   &--title {
     font-weight: 300;

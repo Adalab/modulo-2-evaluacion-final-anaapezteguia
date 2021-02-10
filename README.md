@@ -8,7 +8,7 @@ Este ejercicio está realizado con una base de código preparada por los docente
 
 ### Cómo funciona el proyecto: Buscador de series
 
-Lanzamos una petición al servidor de TV maze para buscar una serie. Debajo aparecerán nuestros resultados de búsqueda, que son clicables para añadirlos a favoritos. Esto lo comprobamos visualmente de dos formas:
+Lanzamos una petición al API de TV maze para buscar una serie. Debajo aparecerán nuestros resultados de búsqueda, que son clicables para añadirlos a favoritos. Esto lo comprobamos visualmente de dos formas:
 
 - Primero, porque aparece un marco que destaca la imagen de la serie al tiempo que se resalta el nombre y aparece una estrella a su lado (⭑),
 

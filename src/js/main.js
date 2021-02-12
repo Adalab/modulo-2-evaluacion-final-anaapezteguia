@@ -101,6 +101,10 @@ function paintSearchResults() {
     let myImg = serieImgsObj === null ? defaultImg : serieImgsObj.medium;
     htmlCode += `<img class="${isFavoriteClass} favImg js-seriesImg" src="${myImg}" alt="${seriesName}" title="${seriesName}" height="295px" width="210px" >`;
     htmlCode += `<h3 class="searchList__title ${isFavoriteClass} title js-seriesTitle">${seriesName} ${fav}`;
+    
+    const seriesDay = serie.schedule.days;
+    let myDay = (seriesDay.length === 0) ? 'No hay días disponibles' : seriesDay;
+    htmlCode += `<p>${myDay}</p>`;
     htmlCode += '</div>';
     htmlCode += '</li>';
   }
@@ -190,9 +194,10 @@ function handlePickedSeries(ev) {
     setInLocalStorage();
   } else {
     // si la serie está en favos busco su índice y la elimino
-    favSeries.splice(favoritesFoundIndex, 1);
+    // favSeries.splice(favoritesFoundIndex, 1);
     // y borro de Local Storage
-    removeFromLocalStorage();
+    // removeFromLocalStorage();
+    console.log(favSeries[favoritesFoundIndex].name);
   }
   // vuelvo a pintar
   paintSearchResults();
